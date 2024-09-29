@@ -1,0 +1,12 @@
+---
+- apt_repository:
+    repo: ppa:nextcloud-devs/client
+    state: absent
+
+- name: install nextcloud desktop
+  apt: pkg=nextcloud-desktop state=latest
+
+#- name: start nextcloud client
+  #become: true
+  #become_user: "{{ ansible_env.USER }}"
+  #shell: 'nextcloud &'

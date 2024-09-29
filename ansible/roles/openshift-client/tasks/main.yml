@@ -1,0 +1,27 @@
+---
+
+- name: oc client download
+  get_url:
+    url: 'https://downloads-openshift-console.ocp.appuio.puzzle.ch/amd64/linux/oc.tar'
+    dest: /tmp/oc.tar
+
+- name: create bin directory if required...
+  become: true
+  become_user: "{{ main_user }}"
+  file:
+    path: '~/bin'
+    state: directory
+    mode: 0700
+
+- name: oc client unarchive
+  become: true
+  become_user: "{{ main_user }}"
+  unarchive:
+    remote_src: yes
+    src: /tmp/oc.tar
+    dest: '~/bin'
+
+- name: oc client cleanup
+  file:
+    path: /tmp/oc.tar
+    state: absent

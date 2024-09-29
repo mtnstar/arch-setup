@@ -1,0 +1,48 @@
+---
+- name: Add an apt key for yubico repo
+  ansible.builtin.apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 32CBA1A9 
+
+- apt_repository:
+    repo: ppa:yubico/stable
+    state: present
+
+- name: install yubikey manager
+  apt: pkg=yubikey-manager state=latest
+
+- name: install libpam yubico
+  apt: pkg=libpam-yubico state=latest
+
+- name: install libpam-u2f
+  apt: pkg=libpam-u2f state=latest
+
+- name: install yubico piv tool
+  apt: pkg=yubico-piv-tool state=latest
+
+# FIXME
+#- name: add udev rule for yubikey
+  #template:
+    #src: 45-yubikey.rules
+    #dest: /etc/udev/rules.d/
+    #owner: root
+    #group: root
+    #mode: 0444
+
+#- name: add yubico udev rules
+  #template:
+    #src: 70-u2f.rules
+    #dest: /etc/udev/rules.d/
+    #owner: root
+    #group: root
+    #mode: 0444
+ 
+#- name: enable yubikey for pam
+  #ansible.builtin.lineinfile:
+    #path: /etc/pam.d/common-auth
+    #regexp: '^auth\s+sufficient\s+pam_u2f\.so'
+    #insertbefore: '^auth\s+.+\s+pam_unix\.so\s+nullok_secure'
+    #line: 'auth sufficient pam_u2f.so'
+
+#- name: reload udev rules
+  #shell: 'udevadm control --reload-rules && udevadm trigger'

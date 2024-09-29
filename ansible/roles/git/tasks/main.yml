@@ -1,0 +1,45 @@
+---
+
+- name: install git
+  apt: pkg=git state=latest
+
+- name: install gitg
+  apt: pkg=gitg state=latest
+
+- name: install meld
+  apt: pkg=meld state=latest
+
+- name: install gnome keyring dev
+  apt: pkg=libsecret-1-dev state=latest
+
+- name: compile git gnome keyring helper
+  command: make
+  args:
+    chdir: /usr/share/doc/git/contrib/credential/libsecret
+
+- name: add gnome keyring helper to git
+  become: true
+  become_user: "{{ main_user }}"
+  command: git config --global credential.helper /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
+
+- name: link gitignore
+  become: true
+  become_user: "{{ main_user }}"
+  file: src=~/git/setup/profile/git/gitignore dest=~/.gitignore state=link
+
+- name: setup git config
+  become: true
+  become_user: "{{ main_user }}"
+  command: git config --global {{ item }}
+  with_items:
+    - alias.co checkout
+    - alias.ci commit
+    - alias.st status
+    - alias.up 'pull --rebase'
+    - alias.br branch
+    - alias.dt difftool
+    - core.editor vim
+    - core.excludesfile ~/.gitignore
+    - color.ui auto
+    - push.default current
+    - init.defaultBranch main

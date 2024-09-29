@@ -1,0 +1,10 @@
+---
+- name: Configure desktop
+  hosts: localhost
+
+  tasks:
+    - import_tasks: tasks/update.yml
+    - import_tasks: tasks/setup-aur.yml
+
+  roles:
+    - { role: regolith, tags: ['regolith'] }

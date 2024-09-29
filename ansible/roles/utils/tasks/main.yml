@@ -1,0 +1,15 @@
+---
+- name: install uuid
+  apt: pkg=uuid state=latest
+
+- name: install shutter screenshot tool
+  apt: pkg=shutter state=latest
+
+- name: install flameshot screenshot tool
+  apt: pkg=flameshot state=latest
+
+- name: install jq command line json parser
+  apt: pkg=jq state=latest
+
+- name: install gnome disk utils
+  apt: pkg=gnome-disk-utility state=latest

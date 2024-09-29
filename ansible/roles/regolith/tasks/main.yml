@@ -1,0 +1,8 @@
+---
+
+- name: Install Regolith desktop
+  kewlfft.aur.aur:
+    name: regolith-full
+    state: present
+  become: yes
+  become_user: aur_builder
