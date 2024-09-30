@@ -327,6 +327,12 @@ for service in "${services[@]}"; do
     systemctl enable "$service" --root=/mnt &>/dev/null
 done
 
+info_print "Cloning ansible setup git repo."
+pacman -Sy --noconfirm git
+mkdir -p /mnt/home/$username/git/setup
+git clone https://github.com/mtnstar/arch-setup /mnt/home/$username/git/setup/arch-setup
+chown -R 1000:1000 /mnt/home/$username/git/setup/arch-setup
+
 # Finishing up.
 info_print "Done, you may now wish to reboot (further changes can be done by chrooting into /mnt)."
 exit
