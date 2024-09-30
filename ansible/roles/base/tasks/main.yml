@@ -10,6 +10,7 @@
     name:
       - base-devel   # Includes fakeroot and other tools needed for building
       - git          # Required for cloning AUR repositories
+      - go
     state: present
 
 - name: Create the `aur_builder` user
