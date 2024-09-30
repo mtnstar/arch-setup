@@ -22,16 +22,24 @@
 
 - name: Allow the `aur_builder` user to run `sudo pacman` without a password
   become: yes
-  ansible.builtin.lineinfile:
+  lineinfile:
     path: /etc/sudoers.d/11-install-aur_builder
     line: 'aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman'
     create: yes
     mode: 0644
     validate: 'visudo -cf %s'
 
-- name: Clone, build and install yay
+- name: Clone yay sources
+  git:
+    repo: https://aur.archlinux.org/yay.git
+    dest: /tmp/yay
+  become: yes
+  become_user: aur_builder
+
+- name: Build and install yay
   command:
-    cmd: "git clone https://aur.archlinux.org/yay.git /tmp/yay && cd /tmp/yay && makepkg -si --noconfirm && rm -rf /tmp/yay"
+    cmd: "makepkg -si --noconfirm && rm -rf /tmp/yay"
+    chdir: /tmp/yay
   become: yes
   become_user: aur_builder
   args:
