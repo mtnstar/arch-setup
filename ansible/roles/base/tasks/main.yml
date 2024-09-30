@@ -1,4 +1,10 @@
 ---
+- name: Update package cache
+  become: true
+  pacman:
+    update_cache: true
+  changed_when: false
+
 - name: Install dependencies for building AUR packages
   pacman:
     name:
@@ -24,8 +30,7 @@
 
 - name: Clone, build and install yay
   command:
-    cmd: "git clone https://aur.archlinux.org/yay.git /tmp/yay && makepkg -si --noconfirm && rm -rf /tmp/yay"
-    chdir: "/tmp/yay"
+    cmd: "git clone https://aur.archlinux.org/yay.git /tmp/yay && cd /tmp/yay && makepkg -si --noconfirm && rm -rf /tmp/yay"
   become: yes
   become_user: aur_builder
   args:
