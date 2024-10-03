@@ -36,6 +36,14 @@
     mode: 0440
     validate: 'visudo -cf %s'
 
+- name: Ensure MAKEFLAGS is set in /etc/makepkg.conf
+  become: yes
+  ansible.builtin.lineinfile:
+    path: /etc/makepkg.conf
+    regexp: '^MAKEFLAGS='
+    line: 'MAKEFLAGS="-j$(nproc)"'
+    state: present
+
 - name: Clone yay sources
   git:
     repo: https://aur.archlinux.org/yay.git
