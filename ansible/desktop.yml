@@ -5,3 +5,4 @@
   roles:
     - { role: base }
     - { role: regolith, tags: ['regolith'] }
+    - { role: network-tools, tags: ['network-tools'] }

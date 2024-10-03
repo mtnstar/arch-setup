@@ -1,0 +1,14 @@
+---
+- name: Install network tools
+  pacman:
+    name:
+      - nload
+      - wireshark-qt
+      - wireshark-cli
+    state: present
+
+- name: Ensure user is part of the wireshark group
+  user:
+    name: "{{ main_user }}"
+    groups: wireshark
+    append: yes
