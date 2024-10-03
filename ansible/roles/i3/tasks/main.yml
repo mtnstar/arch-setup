@@ -1,0 +1,27 @@
+---
+
+- name: Install i3
+  kewlfft.aur.aur:
+    name: i3-gaps
+    state: present
+  become: yes
+  become_user: aur_builder
+
+- name: Install other i3 components
+  pacman:
+    name:
+      - i3status
+    state: present
+
+- name: Install gdm
+  pacman:
+    name:
+      - gdm
+    state: present
+
+- name: Enable GDM service
+  become: yes
+  systemd:
+    name: gdm.service
+    enabled: yes
+    state: started
