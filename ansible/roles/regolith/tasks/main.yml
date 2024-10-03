@@ -6,3 +6,10 @@
     state: present
   become: yes
   become_user: aur_builder
+
+- name: Enable GDM service
+  become: yes
+  systemd:
+    name: gdm.service
+    enabled: yes
+    state: started
