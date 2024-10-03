@@ -25,3 +25,14 @@
     name: gdm.service
     enabled: yes
     state: started
+
+- name: Create i3-gaps session file for GDM
+  ansible.builtin.copy:
+    dest: /usr/share/xsessions/i3-gaps.desktop
+    content: |
+      [Desktop Entry]
+      Name=i3-gaps
+      Comment=This session logs you into i3-gaps
+      Exec=i3
+      TryExec=i3
+      Type=Application
