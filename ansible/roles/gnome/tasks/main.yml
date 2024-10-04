@@ -1,0 +1,6 @@
+---
+- name: Install gnome
+  pacman:
+    name:
+      - gnome
+    state: present
