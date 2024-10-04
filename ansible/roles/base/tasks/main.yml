@@ -1,9 +1,17 @@
 ---
-- name: Update package cache
+- name: Update package cache and upgrade all packages
   become: true
   pacman:
     update_cache: true
+    upgrade: yes
   changed_when: false
+
+- name: Update AUR packages
+  kewlfft.aur.aur:
+    update_cache: true
+    upgrade: yes
+  become: yes
+  become_user: aur_builder
 
 - name: Install base tools
   pacman:
