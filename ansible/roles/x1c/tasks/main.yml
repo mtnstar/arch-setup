@@ -4,3 +4,10 @@
     name:
       - sof-firmware
     state: present
+
+- name: Install modem manager (5G)
+  pacman:
+    name:
+      - modemmanager
+      - usb_modeswitch
+    state: present
