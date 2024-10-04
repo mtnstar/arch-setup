@@ -5,6 +5,7 @@
   roles:
     - { role: base }
     - { role: profile, tags: ['profile'] }
+    - { role: git, tags: ['git'] }
     - { role: gnome, tags: ['gnome'] }
     - { role: i3, tags: ['i3'] }
     - { role: network-tools, tags: ['network-tools'] }
