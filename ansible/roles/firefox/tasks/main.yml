@@ -1,4 +1,6 @@
 ---
-
-- name: install firefox
-  apt: pkg=firefox state=latest
+- name: Install firefox
+  pacman:
+    name:
+      - firefox
+    state: present
