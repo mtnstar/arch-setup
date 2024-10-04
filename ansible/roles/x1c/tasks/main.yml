@@ -1,0 +1,6 @@
+---
+- name: Install sound open firmware
+  pacman:
+    name:
+      - sof-firmware
+    state: present
