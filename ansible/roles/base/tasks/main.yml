@@ -12,6 +12,7 @@
       - go
       - vi
       - vim
+      - less
     state: present
 
 - name: Install dependencies for building AUR packages
