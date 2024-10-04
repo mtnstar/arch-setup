@@ -1,6 +1,9 @@
 ---
 - name: install xfce terminal
-  apt: pkg=xfce4-terminal state=latest
+  pacman:
+    name:
+      - xfce4-terminal
+    state: present
 
 - name: xfce terminal settings directory
   become: true

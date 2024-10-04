@@ -4,6 +4,8 @@
 
   roles:
     - { role: base }
+    - { role: profile, tags: ['profile'] }
     - { role: gnome, tags: ['gnome'] }
     - { role: i3, tags: ['i3'] }
     - { role: network-tools, tags: ['network-tools'] }
+    - { role: terminal, tags: ['terminal'] }
