@@ -1,6 +1,9 @@
 ---
-- name: Configure user session settings
+- name: Configure user settings
   hosts: localhost
+  vars:
+    setup_config_file: ~/.config/setup.yml
 
   roles:
-    - { role: gnome-user }
+    - { role: user-gnome }
+    - { role: user-git }
