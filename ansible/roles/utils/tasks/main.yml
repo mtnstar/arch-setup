@@ -1,15 +1,18 @@
 ---
-- name: install uuid
-  apt: pkg=uuid state=latest
-
-- name: install shutter screenshot tool
-  apt: pkg=shutter state=latest
-
 - name: install flameshot screenshot tool
-  apt: pkg=flameshot state=latest
-
-- name: install jq command line json parser
-  apt: pkg=jq state=latest
+  pacman:
+    name:
+      - flameshot
+    state: present
 
 - name: install gnome disk utils
-  apt: pkg=gnome-disk-utility state=latest
+  pacman:
+    name:
+      - gnome-disk-utility
+    state: present
+
+- name: Install bitwarden cli client
+  pacman:
+    name:
+      - bitwarden-cli
+    state: present

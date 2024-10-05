@@ -8,6 +8,7 @@
     - { role: git, tags: ['git'] }
     - { role: x1c, tags: ['x1c'] }
     - { role: gnome, tags: ['gnome'] }
+    - { role: utils, tags: ['utils'] }
     - { role: i3, tags: ['i3'] }
     - { role: network-tools, tags: ['network-tools'] }
     - { role: terminal, tags: ['terminal'] }
