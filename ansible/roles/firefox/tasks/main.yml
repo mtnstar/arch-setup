@@ -5,6 +5,12 @@
       - firefox
     state: present
 
+- name: Add ublock origin extension to firefox
+  pacman:
+    name:
+      - firefox-ublock-origin
+    state: present
+
 - name: Add bitwarden extension to firefox
   kewlfft.aur.aur:
     name: firefox-extension-bitwarden-bin
