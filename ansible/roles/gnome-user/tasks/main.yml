@@ -1,0 +1,9 @@
+---
+- name: Enable Pop Shell extension for GNOME user
+  shell: "gnome-extensions enable pop-shell@system76.com"
+
+- name: Set GNOME to use 24-hour time format for GNOME user
+  shell: "gsettings set org.gnome.desktop.interface clock-format '24h'"
+
+- name: Set GNOME keyboard layout to US International for GNOME user
+  shell: "gsettings set org.gnome.desktop.input-sources sources \"[('xkb', 'us+intl')]\""

@@ -1,0 +1,6 @@
+---
+- name: Configure user session settings
+  hosts: localhost
+
+  roles:
+    - { role: gnome-user }
