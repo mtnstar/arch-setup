@@ -9,4 +9,4 @@
   shell: "gsettings set org.gnome.desktop.input-sources sources \"[('xkb', 'us+intl')]\""
 
 - name: Set GNOME wallpaper
-  shell: gsettings set org.gnome.desktop.background picture-uri 'file:///home/{{ ansible_env.HOME }}/git/setup/profile/wallpaper.jpg'
+  shell: gsettings set org.gnome.desktop.background picture-uri 'file:///home/{{ main_user }}/git/setup/profile/wallpaper.jpg'
