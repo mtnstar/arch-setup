@@ -12,3 +12,34 @@
   become: yes
   become_user: aur_builder
 
+- name: Check if GNOME session is running for the user
+  shell: "pgrep -u {{ main_user }} gnome-session"
+  become: yes
+  become_user: "{{ main_user }}"
+  register: gnome_session_running
+  ignore_errors: yes  # If no session is running, it will continue without failure.
+
+- name: Get DBUS session address for the user
+  shell: "grep -z DBUS_SESSION_BUS_ADDRESS /proc/$(pgrep -u {{ main_user }} gnome-session)/environ | tr '\\0' '\\n'"
+  become: yes
+  become_user: "{{ main_user }}"
+  when: gnome_session_running.rc == 0  # Only run if GNOME session is active.
+  register: dbus_address
+
+- name: Enable Pop Shell extension for GNOME user
+  shell: "{{ dbus_address.stdout }} gnome-extensions enable pop-shell@system76.com"
+  become: yes
+  become_user: "{{ main_user }}"
+  when: gnome_session_running.rc == 0  # Only run if GNOME session is active.
+
+- name: Set GNOME to use 24-hour time format for GNOME user
+  shell: "{{ dbus_address.stdout }} gsettings set org.gnome.desktop.interface clock-format '24h'"
+  become: yes
+  become_user: "{{ main_user }}"
+  when: gnome_session_running.rc == 0  # Only run if GNOME session is active.
+
+- name: Set GNOME keyboard layout to US International for GNOME user
+  shell: "{{ dbus_address.stdout }} gsettings set org.gnome.desktop.input-sources sources \"[('xkb', 'us+intl')]\""
+  become: yes
+  become_user: "{{ main_user }}"
+  when: gnome_session_running.rc == 0  # Only run if GNOME session is active.
