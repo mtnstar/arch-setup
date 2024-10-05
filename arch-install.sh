@@ -212,7 +212,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 # just use US locale and keymap
 locale="en_US.UTF-8"
-kblayout="us"
+kblayout="us-intl"
 
 # Configure selected locale and console keymap
 sed -i "/^#$locale/s/^#//" /mnt/etc/locale.gen
