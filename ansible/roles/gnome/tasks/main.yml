@@ -4,3 +4,11 @@
     name:
       - gnome
     state: present
+
+- name: Install pop shell gnome extension
+  kewlfft.aur.aur:
+    name: gnome-shell-extension-pop-shell-git
+    state: present
+  become: yes
+  become_user: aur_builder
+
