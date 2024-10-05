@@ -5,5 +5,4 @@
     setup_config_file: ~/.config/setup.yml
 
   roles:
-    - { role: user-gnome }
-    - { role: user-git }
+    - { role: gnome }

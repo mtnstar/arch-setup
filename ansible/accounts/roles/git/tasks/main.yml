@@ -1,0 +1,14 @@
+---
+- name: Fetch GitHub token from Vaultwarden using Bitwarden CLI
+  shell: |
+    bitwarden get --name "GitHub Token"
+  register: github_token_output
+  when: bw_login.rc == 0  # Only run if login was successful
+
+- name: Add GitHub token to GNOME keyring
+  shell: |
+    secret-tool store --label="GitHub Token" github_token "{{ github_token_output.stdout }}"
+  environment:
+    VAULTWARDEN_HOSTNAME: "{{ vaultwarden_hostname }}"
+    VAULTWARDEN_USER: "{{ vaultwarden_user }}"
+    VAULTWARDEN_PASSWORD: "{{ vaultwarden_password }}"

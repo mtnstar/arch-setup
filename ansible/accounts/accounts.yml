@@ -1,0 +1,65 @@
+---
+- name: Configure user accounts and settings
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+    setup_config_file: "{{ lookup('env', 'HOME') }}/.config/setup.yml"
+
+  vars_prompt:
+    - name: vaultwarden_hostname
+      prompt: "Enter Vaultwarden hostname"
+      private: no
+    - name: vaultwarden_user
+      prompt: "Enter Vaultwarden username"
+      private: no
+    - name: vaultwarden_password
+      prompt: "Enter Vaultwarden password"
+      private: yes
+
+  tasks:
+    - name: Check if setup config file exists
+      stat:
+        path: "{{ setup_config_file }}"
+      register: config_file
+
+    - name: Load Vaultwarden credentials if config file exists
+      include_vars:
+        file: "{{ setup_config_file }}"
+      when: config_file.stat.exists
+
+    - name: Set variables from user input if config file does not exist
+      set_fact:
+        vaultwarden_hostname: "{{ vaultwarden_hostname }}"
+        vaultwarden_user: "{{ vaultwarden_user }}"
+        vaultwarden_password: "{{ vaultwarden_password }}"
+      when: not config_file.stat.exists
+
+    - name: Save Vaultwarden credentials to config file
+      copy:
+        dest: "{{ setup_config_file }}"
+        content: |
+          vaultwarden_hostname: "{{ vaultwarden_hostname }}"
+          vaultwarden_user: "{{ vaultwarden_user }}"
+      when: not config_file.stat.exists
+
+    - name: Login to Vaultwarden
+      shell: |
+        bitwarden login --apikey --email "{{ vaultwarden_user }}" --password "{{ vaultwarden_password }}"
+      register: bw_login
+
+    - name: Ensure Vaultwarden login was successful
+      fail:
+        msg: "Failed to log in to Vaultwarden."
+      when: bw_login.rc != 0
+
+  roles:
+    - role: git
+      vaultwarden_hostname: "{{ vaultwarden_hostname }}"
+      vaultwarden_user: "{{ vaultwarden_user }}"
+      vaultwarden_password: "{{ vaultwarden_password }}"
+
+    #- role: nextcloud
+      #vaultwarden_hostname: "{{ vaultwarden_hostname }}"
+      #vaultwarden_user: "{{ vaultwarden_user }}"
+      #vaultwarden_password: "{{ vaultwarden_password }}"
