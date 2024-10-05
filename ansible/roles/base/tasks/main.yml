@@ -6,29 +6,6 @@
     upgrade: yes
   changed_when: false
 
-- name: Update AUR packages
-  kewlfft.aur.aur:
-    update_cache: true
-    upgrade: yes
-  become: yes
-  become_user: aur_builder
-
-- name: Install base tools
-  pacman:
-    name:
-      - git
-      - go
-      - vi
-      - vim
-      - less
-    state: present
-
-- name: Install dependencies for building AUR packages
-  pacman:
-    name:
-      - base-devel   # Includes fakeroot and other tools needed for building
-    state: present
-
 - name: Create the `aur_builder` user
   become: yes
   ansible.builtin.user:
@@ -53,6 +30,22 @@
     line: 'MAKEFLAGS="-j$(nproc)"'
     state: present
 
+- name: Install base tools
+  pacman:
+    name:
+      - git
+      - go
+      - vi
+      - vim
+      - less
+    state: present
+
+- name: Install dependencies for building AUR packages
+  pacman:
+    name:
+      - base-devel   # Includes fakeroot and other tools needed for building
+    state: present
+
 - name: Clone yay sources
   git:
     repo: https://aur.archlinux.org/yay.git
@@ -68,3 +61,10 @@
   become_user: aur_builder
   args:
     creates: "/usr/bin/yay"
+
+- name: Update AUR packages
+  kewlfft.aur.aur:
+    update_cache: true
+    upgrade: yes
+  become: yes
+  become_user: aur_builder
