@@ -11,6 +11,10 @@
       - gnome-disk-utility
     state: present
 
+- name: Remove conflicting nodejs package
+  command: pacman -Rns nodejs
+  ignore_errors: yes
+
 - name: Install bitwarden cli client
   pacman:
     name:
