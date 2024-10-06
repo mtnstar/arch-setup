@@ -6,7 +6,7 @@
   shell: "gsettings set org.gnome.desktop.interface clock-format '24h'"
 
 - name: Set GNOME keyboard layout to US International for GNOME user
-  shell: "gsettings set org.gnome.desktop.input-sources sources \"[('xkb', 'us+intl')]\""
+  shell: "gsettings set org.gnome.desktop.input-sources sources \"[('xkb', 'us+altgr-intl')]\""
 
 - name: Set GNOME wallpaper
   shell: gsettings set org.gnome.desktop.background picture-uri 'file:///home/{{ main_user }}/git/setup/profile/wallpaper.jpg'
