@@ -1,0 +1,23 @@
+---
+- name: Install rvm
+  kewlfft.aur.aur:
+    name:
+      - rvm
+    state: present
+  become: yes
+  become_user: aur_builder
+#- name: install mysql client
+  #apt: pkg=mysql-client state=latest
+
+#- name: install dev libs
+  #apt: pkg=libmysqlclient-dev state=latest
+
+#- name: install sqlite3
+  #apt: pkg=sqlite3 state=latest
+
+#- name: install postgresql dev lib
+  #apt: pkg=libpq-dev state=latest
+
+#- name: install graphviz
+  #apt: pkg=graphviz state=latest
+
