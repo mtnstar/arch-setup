@@ -1,7 +1,9 @@
 ---
-
-- name: install vim
-  apt: pkg=vim state=latest
+- name: Install neovim
+  pacman:
+    name:
+      - neovim
+    state: present
 
 - name: clone vim config
   become: true
@@ -32,3 +34,17 @@
         src=~/.vim/vimrc
         state=link
         force=yes
+
+- name: Create neovim config dir
+  become: true
+  become_user: "{{ main_user }}"
+  file:
+    path: "/home/{{ main_user }}/.config/nvim"
+    state: directory
+
+- name: add neovim config
+  become: true
+  become_user: "{{ main_user }}"
+  template:
+    src: init.vim
+    dest: "/home/{{ main_user }}/.config/nvim/init.vim"

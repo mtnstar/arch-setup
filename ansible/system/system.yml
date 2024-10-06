@@ -14,3 +14,4 @@
     - { role: terminal, tags: ['terminal'] }
     - { role: firefox, tags: ['firefox'] }
     - { role: nitrokey, tags: ['nitrokey'] }
+    - { role: vim, tags: ['vim'] }
