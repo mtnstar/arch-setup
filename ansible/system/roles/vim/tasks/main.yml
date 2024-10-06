@@ -3,12 +3,17 @@
   pacman:
     name:
       - neovim
+      - npm # required by plugins
     state: present
 
 - name: clone vim config
   become: true
   become_user: "{{ main_user }}"
-  git: repo=https://github.com/psunix/dot-vim.git dest="~/.vim" update=yes
+  git:
+    repo: https://github.com/psunix/dot-vim.git
+    dest: "~/.vim"
+    update: yes
+    version: main
 
 - name: Create backup dir
   become: true
