@@ -11,3 +11,9 @@
       - modemmanager
       - usb_modeswitch
     state: present
+
+- name: Install fingerprint reader daemon
+  pacman:
+    name:
+      - fprintd
+    state: present
