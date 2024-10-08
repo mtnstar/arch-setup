@@ -17,3 +17,10 @@
     name:
       - fprintd
     state: present
+
+- name: Enable Bluetooth service is started and enabled
+  become: yes
+  systemd:
+    name: bluetooth
+    enabled: yes
+    state: started

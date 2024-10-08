@@ -19,3 +19,4 @@
     - { role: ruby, tags: ['ruby'] }
     - { role: docker, tags: ['docker'] }
     - { role: msg-tools, tags: ['msg-tools'] }
+    - { role: video, tags: ['video'] }
