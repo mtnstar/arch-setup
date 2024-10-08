@@ -1,0 +1,6 @@
+---
+github_repos:
+  - repo: "https://github.com/mtnstar/typo3-blogger"
+    dest: "~/git/mtnstar/typo3-blogger"
+  - repo: "https://github.com/mtnstar/web-typo3"
+    dest: "~/git/mtnstar/web-typo3"

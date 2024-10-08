@@ -1,0 +1,13 @@
+---
+- name: Ensure git directory exists
+  file:
+    path: "~/git/mtnstar"
+    state: directory
+    mode: '0755'
+
+- name: Clone Git repositories
+  git:
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}"
+    version: "HEAD"
+  loop: "{{ github_repos }}"
