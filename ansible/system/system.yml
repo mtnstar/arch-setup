@@ -17,3 +17,4 @@
     - { role: nitrokey, tags: ['nitrokey'] }
     - { role: vim, tags: ['vim'] }
     - { role: ruby, tags: ['ruby'] }
+    - { role: docker, tags: ['docker'] }
