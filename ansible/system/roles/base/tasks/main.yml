@@ -38,6 +38,7 @@
       - vi
       - vim
       - less
+      - wget
     state: present
 
 - name: Install dependencies for building AUR packages
