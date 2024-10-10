@@ -15,3 +15,10 @@
   user: name="{{ main_user }}"
         groups=docker
         append=yes
+
+- name: Enable docker daemon
+  become: yes
+  systemd:
+    name: docker
+    enabled: yes
+    state: started
