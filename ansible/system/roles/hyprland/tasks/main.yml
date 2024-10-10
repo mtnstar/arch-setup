@@ -1,0 +1,43 @@
+---
+- name: Install hyprland
+  pacman:
+    name:
+      - hyprland
+    state: present
+
+- name: Install kitty terminal
+  pacman:
+    name:
+      - kitty
+    state: present
+
+- name: Install wofi menu
+  pacman:
+    name:
+      - wofi
+    state: present
+
+- name: Install waybar
+  pacman:
+    name:
+      - waybar
+      - ttf-font-awesome
+    state: present
+
+- name: link hyprland config from profile
+  become: true
+  become_user: "{{ main_user }}"
+  file:
+    src: '~/git/setup/profile/hypr/hyprland.conf'
+    dest: '~/.config/hypr/hyprland.conf'
+    state: link
+    force: true
+
+- name: link waybar config from profile
+  become: true
+  become_user: "{{ main_user }}"
+  file:
+    src: '~/git/setup/profile/waybar/config'
+    dest: '~/.config/waybar/config'
+    state: link
+    force: true
