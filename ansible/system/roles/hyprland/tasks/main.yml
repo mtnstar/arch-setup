@@ -5,6 +5,14 @@
       - hyprland
     state: present
 
+- name: Install hyprland tools
+  pacman:
+    name:
+      - hyprlock
+      - hyprpaper
+      - pavucontrol
+    state: present
+
 - name: Install kitty terminal
   pacman:
     name:
@@ -39,5 +47,14 @@
   file:
     src: '~/git/setup/profile/waybar/config'
     dest: '~/.config/waybar/config'
+    state: link
+    force: true
+
+- name: link hyprpaper config from profile
+  become: true
+  become_user: "{{ main_user }}"
+  file:
+    src: '~/git/setup/profile/hypr/hyprpaper.conf'
+    dest: '~/.config/hypr/hyprpaper.conf'
     state: link
     force: true
