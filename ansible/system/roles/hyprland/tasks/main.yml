@@ -8,7 +8,7 @@
 - name: Install hyprland tools
   pacman:
     name:
-      - hyprlock
+      - swaylock
       - hyprpaper
       - pavucontrol
     state: present
