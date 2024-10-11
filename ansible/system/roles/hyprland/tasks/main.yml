@@ -58,3 +58,12 @@
     dest: '~/.config/hypr/hyprpaper.conf'
     state: link
     force: true
+
+- name: link kitty terminal conf
+  become: true
+  become_user: "{{ main_user }}"
+  file:
+    src: '~/git/setup/profile/kitty/kitty.conf'
+    dest: '~/.config/kitty/kitty.conf'
+    state: link
+    force: true
