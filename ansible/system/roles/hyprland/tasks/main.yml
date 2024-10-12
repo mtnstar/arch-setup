@@ -12,6 +12,7 @@
       - hyprpaper
       - pavucontrol
       - brightnessctl
+      - blueman
     state: present
 
 - name: Install kitty terminal
