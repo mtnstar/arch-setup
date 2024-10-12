@@ -24,3 +24,11 @@
     name: bluetooth
     enabled: yes
     state: started
+
+- name: Ensure fingerprint auth is configured for sudo
+  blockinfile:
+    path: /etc/pam.d/sudo
+    block: |
+      auth      sufficient   pam_fprintd.so
+    insertbefore: BOF
+    state: present

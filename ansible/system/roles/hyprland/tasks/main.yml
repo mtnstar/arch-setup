@@ -69,3 +69,14 @@
     dest: '~/.config/kitty/kitty.conf'
     state: link
     force: true
+
+- name: Configure PAM for swaylock with fingerprint authentication
+  copy:
+    dest: /etc/pam.d/swaylock
+    content: |
+      auth      sufficient   pam_fprintd.so
+      auth      sufficient   pam_unix.so try_first_pass likeauth nullok
+      auth      include      login
+    owner: root
+    group: root
+    mode: '0644'
