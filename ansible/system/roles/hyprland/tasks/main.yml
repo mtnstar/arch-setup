@@ -13,6 +13,7 @@
       - pavucontrol
       - brightnessctl
       - blueman
+      - flameshot
     state: present
 
 - name: Install kitty terminal
