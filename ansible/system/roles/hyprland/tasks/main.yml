@@ -13,8 +13,14 @@
       - pavucontrol
       - brightnessctl
       - blueman
-      - flameshot
     state: present
+
+- name: Install hyprland tools AUR
+  kewlfft.aur.aur:
+    name: flameshot-git
+    state: present
+  become: yes
+  become_user: aur_builder
 
 - name: Install kitty terminal
   pacman:
