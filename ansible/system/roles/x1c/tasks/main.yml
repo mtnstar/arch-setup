@@ -12,6 +12,13 @@
       - usb_modeswitch
     state: present
 
+- name: Enable modem manager service
+  become: yes
+  systemd:
+    name: ModemManager
+    enabled: yes
+    state: started
+
 - name: Install fingerprint reader daemon
   pacman:
     name:
