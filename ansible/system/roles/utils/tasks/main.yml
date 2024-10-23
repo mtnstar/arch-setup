@@ -1,10 +1,4 @@
 ---
-- name: install flameshot screenshot tool
-  pacman:
-    name:
-      - flameshot
-    state: present
-
 - name: install gnome disk utils
   pacman:
     name:
