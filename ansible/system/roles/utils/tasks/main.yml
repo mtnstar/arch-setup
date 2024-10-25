@@ -14,3 +14,9 @@
     name:
       - bitwarden-cli
     state: present
+
+- name: Install evince document viewer
+  pacman:
+    name:
+      - evince
+    state: present
