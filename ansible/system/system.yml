@@ -21,3 +21,4 @@
     - { role: msg-tools, tags: ['msg-tools'] }
     - { role: video, tags: ['video'] }
     - { role: hyprland, tags: ['hyprland'] }
+    - { role: nextcloud, tags: ['nextcloud'] }
