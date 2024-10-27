@@ -1,11 +1,9 @@
 ---
-- name: Install rvm
-  kewlfft.aur.aur:
-    name:
-      - rvm
-    state: present
+- name: Add Ruby plugin to asdf
+  command: "/opt/asdf-vm/bin/asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git"
   become: yes
-  become_user: aur_builder
+  become_user: "{{ main_user }}"
+
 #- name: install mysql client
   #apt: pkg=mysql-client state=latest
 

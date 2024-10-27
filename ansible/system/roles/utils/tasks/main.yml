@@ -20,3 +20,9 @@
     name:
       - evince
     state: present
+
+- name: Install bash completion
+  pacman:
+    name:
+      - bash-completion
+    state: present

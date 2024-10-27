@@ -8,6 +8,7 @@
     - { role: git, tags: ['git'] }
     - { role: udev, tags: ['udev'] }
     - { role: x1c, tags: ['x1c'] }
+    - { role: asdf, tags: ['asdf'] }
     - { role: gnome, tags: ['gnome'] }
     - { role: utils, tags: ['utils'] }
     - { role: i3, tags: ['i3'] }

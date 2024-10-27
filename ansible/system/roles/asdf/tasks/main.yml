@@ -1,0 +1,16 @@
+---
+- name: Install asdf
+  kewlfft.aur.aur:
+    name:
+      - asdf-vm
+    state: present
+  become: yes
+  become_user: aur_builder
+
+- name: Ensure .asdf directory exists
+  file:
+    path: "~/.asdf"
+    state: directory
+  become: yes
+  become_user: "{{ main_user }}"
+
