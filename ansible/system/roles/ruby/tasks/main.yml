@@ -4,18 +4,19 @@
   become: yes
   become_user: "{{ main_user }}"
 
-#- name: install mysql client
-  #apt: pkg=mysql-client state=latest
+- name: Add Ruby 3.2
+  command: "/opt/asdf-vm/bin/asdf install ruby 3.2.5"
+  become: yes
+  become_user: "{{ main_user }}"
 
-#- name: install dev libs
-  #apt: pkg=libmysqlclient-dev state=latest
+- name: Set default ruby
+  command: "/opt/asdf-vm/bin/asdf global ruby 3.2.5"
+  become: yes
+  become_user: "{{ main_user }}"
 
-#- name: install sqlite3
-  #apt: pkg=sqlite3 state=latest
-
-#- name: install postgresql dev lib
-  #apt: pkg=libpq-dev state=latest
-
-#- name: install graphviz
-  #apt: pkg=graphviz state=latest
-
+- name: Install image tools
+  pacman:
+    name:
+      - imagemagick
+      - perl-image-exiftool
+    state: present
