@@ -39,3 +39,17 @@
       auth      sufficient   pam_fprintd.so
     insertbefore: BOF
     state: present
+
+- name: Install power manager tlp
+  pacman:
+    name:
+      - tlp
+      - tlp-rdw
+    state: present
+
+- name: Enable tlp service
+  become: yes
+  systemd:
+    name: tlp
+    enabled: yes
+    state: started
