@@ -5,3 +5,10 @@
     state: present
   become: yes
   become_user: aur_builder
+
+- name: Install plex desktop
+  kewlfft.aur.aur:
+    name: plex-desktop
+    state: present
+  become: yes
+  become_user: aur_builder
