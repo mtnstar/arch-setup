@@ -5,6 +5,7 @@
       - nload
       - wireshark-qt
       - wireshark-cli
+      - wireguard-tools
     state: present
 
 - name: Ensure user is part of the wireshark group
