@@ -23,3 +23,4 @@
     - { role: video, tags: ['video'] }
     - { role: hyprland, tags: ['hyprland'] }
     - { role: nextcloud, tags: ['nextcloud'] }
+    - { role: android, tags: ['android'] }

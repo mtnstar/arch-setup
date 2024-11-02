@@ -1,0 +1,12 @@
+---
+- name: Install android tools
+  pacman:
+    name:
+      - android-tools
+    state: present
+
+- name: Ensure main user is in adbusers group
+  user:
+    name: "{{ main_user }}"
+    groups: adbusers
+    append: yes
