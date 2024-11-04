@@ -1,4 +1,8 @@
 ---
 
 - name: install libreoffice
-  apt: pkg=libreoffice state=latest
+  pacman:
+    name:
+      - libreoffice-fresh
+      - ttf-ubuntu-font-family
+    state: present

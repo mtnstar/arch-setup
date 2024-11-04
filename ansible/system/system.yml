@@ -24,3 +24,4 @@
     - { role: hyprland, tags: ['hyprland'] }
     - { role: nextcloud, tags: ['nextcloud'] }
     - { role: android, tags: ['android'] }
+    - { role: office, tags: ['office'] }
