@@ -6,6 +6,7 @@
       - wireshark-qt
       - wireshark-cli
       - wireguard-tools
+      - openresolv
     state: present
 
 - name: Ensure user is part of the wireshark group
