@@ -20,3 +20,9 @@
       - imagemagick
       - perl-image-exiftool
     state: present
+
+- name: Create a symlink for exiftool
+  file:
+    src: /usr/bin/vendor_perl/exiftool
+    dest: /usr/bin/exiftool
+    state: link
