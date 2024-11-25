@@ -19,3 +19,10 @@
       - mplayer
       - vlc
     state: present
+
+- name: Install zoom client
+  kewlfft.aur.aur:
+    name: zoom
+    state: present
+  become: yes
+  become_user: aur_builder
