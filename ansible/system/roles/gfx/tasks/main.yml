@@ -1,13 +1,19 @@
 ---
 
 - name: install inkscape
-  apt: pkg=inkscape state=latest
+  pacman:
+    name:
+      - inkscape
+    state: present
 
 - name: install gimp
-  apt: pkg=gimp state=latest
-
-- name: install gimp plugins
-  apt: pkg=gimp-plugin-registry state=latest
+  pacman:
+    name:
+      - gimp
+    state: present
 
 - name: install okular
-  apt: pkg=okular state=latest
+  pacman:
+    name:
+      - okular
+    state: present
