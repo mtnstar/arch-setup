@@ -4,3 +4,31 @@
     name:
       - chromium
     state: present
+
+- name: Create .desktop file directory for user
+  file:
+    path: "/home/{{ main_user }}/.local/share/applications"
+    state: directory
+    owner: "{{ main_user }}"
+    group: "{{ main_user }}"
+    mode: "0755"
+
+- name: Copy Chromium .desktop file to user's applications folder
+  copy:
+    dest: "/home/{{ main_user }}/.local/share/applications/chromium.desktop"
+    content: |
+      [Desktop Entry]
+      Version=1.0
+      Name=Chromium Web Browser
+      GenericName=Web Browser
+      Comment=Access the Internet
+      Exec=chromium --enable-features=WaylandWindowDecorations --ozone-platform=wayland %U
+      Terminal=false
+      Icon=chromium
+      Type=Application
+      Categories=Network;WebBrowser;
+      MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/vnd.mozilla.xul+xml;x-scheme-handler/http;x-scheme-handler/https;
+      StartupNotify=true
+    owner: "{{ main_user }}"
+    group: "{{ main_user }}"
+    mode: "0644"
