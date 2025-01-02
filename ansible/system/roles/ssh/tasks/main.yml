@@ -1,0 +1,8 @@
+- name: Enable ssh agent daemon
+  become: yes
+  become_user: "{{ main_user }}"
+  systemd:
+    name: ssh-agent
+    scope: user
+    enabled: yes
+    state: started

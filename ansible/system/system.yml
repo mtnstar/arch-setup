@@ -4,6 +4,7 @@
 
   roles:
     - { role: base, tags: ['base'] }
+    - { role: ssh, tags: ['ssh'] }
     - { role: profile, tags: ['profile'] }
     - { role: git, tags: ['git'] }
     - { role: udev, tags: ['udev'] }
