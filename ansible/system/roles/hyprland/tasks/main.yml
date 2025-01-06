@@ -13,6 +13,7 @@
       - pavucontrol
       - brightnessctl
       - blueman
+      - hyprland-qtutils
     state: present
 
 - name: Install hyprland tools AUR
@@ -82,7 +83,7 @@
     dest: /etc/pam.d/swaylock
     content: |
       auth      sufficient   pam_fprintd.so
-      auth      sufficient   pam_unix.so try_first_pass likeauth nullok
+      auth      required     pam_unix.so try_first_pass likeauth
       auth      include      login
     owner: root
     group: root
