@@ -5,4 +5,6 @@
     name:
       - libreoffice-fresh
       - ttf-ubuntu-font-family
+      - hunspell-en_gb
+      - hunspell-en_us
     state: present
