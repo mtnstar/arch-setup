@@ -7,6 +7,8 @@
       - wireshark-cli
       - wireguard-tools
       - openresolv
+      - inetutils
+      - bind
     state: present
 
 - name: Ensure user is part of the wireshark group
