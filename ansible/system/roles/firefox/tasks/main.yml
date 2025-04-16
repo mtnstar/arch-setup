@@ -10,10 +10,3 @@
     name:
       - firefox-ublock-origin
     state: present
-
-- name: Add bitwarden extension to firefox
-  kewlfft.aur.aur:
-    name: firefox-extension-bitwarden-bin
-    state: present
-  become: yes
-  become_user: aur_builder
