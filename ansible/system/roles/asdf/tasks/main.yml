@@ -1,16 +1,28 @@
 ---
-- name: Install asdf
-  kewlfft.aur.aur:
-    name:
-      - asdf-vm
-    state: present
+- name: clone asdf repository
   become: yes
   become_user: aur_builder
+  git:
+    repo: https://aur.archlinux.org/asdf-vm.git
+    dest: /tmp/asdf-vm
+    update: yes
 
-- name: Ensure .asdf directory exists
-  file:
-    path: "~/.asdf"
-    state: directory
+- name: build and install asdf
   become: yes
-  become_user: "{{ main_user }}"
+  become_user: aur_builder
+  shell: |
+    makepkg -si --noconfirm
+  args:
+    chdir: "/tmp/asdf-vm"
 
+- name: Install asdf Ruby plugin
+  become: true
+  become_user: "{{ main_user }}"
+  shell: |
+    asdf plugin add ruby || true
+
+- name: Install Ruby version 3.4.2
+  become: true
+  become_user: "{{ main_user }}"
+  shell: |
+    asdf install ruby 3.4.2
