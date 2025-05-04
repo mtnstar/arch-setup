@@ -1,42 +1,45 @@
 ---
+- name: Install KVM and virtualization packages
+  become: true
+  package:
+    name:
+      - qemu-full              # Full QEMU suite
+      - libvirt                # libvirt daemon
+      - virt-manager           # optional GUI
+      - dnsmasq                # network bridging
+      - virt-install           # CLI install tool
+      - bridge-utils           # networking tools
+    state: present
 
-- name: install libvirt daemon
-  apt: pkg=libvirt-daemon state=latest
+- name: Enable and start libvirtd
+  become: true
+  systemd:
+    name: libvirtd
+    enabled: true
+    state: started
 
-- name: install virt-manager
-  apt: pkg=virt-manager state=latest
+- name: Add user to libvirt and kvm groups
+  become: true
+  user:
+    name: "{{ main_user }}"
+    groups: [libvirt, kvm]
+    append: true
 
-- name: install qemu-kvm
-  apt: pkg=qemu-kvm state=latest
+- name: Verify that virtualization is supported
+  command: grep -E -c '(vmx|svm)' /proc/cpuinfo
+  register: virt_support
+  changed_when: false
+  failed_when: virt_support.stdout | int == 0
+  tags: check
 
-- name: install qemu-system
-  apt: pkg=qemu-system state=latest
+- name: Ensure default libvirt network is active
+  become: true
+  command: virsh net-autostart default
+  changed_when: false
+  ignore_errors: true
 
-- name: install qemu-utils
-  apt: pkg=qemu-utils state=latest
-
-- name: install libvirt-dev
-  apt: pkg=libvirt-dev state=latest
-
-- name: install bridge utils
-  apt: pkg=bridge-utils state=latest
-
-- name: install firewalld
-  apt: pkg=firewalld state=latest
-
-- name: install ebtables
-  apt: pkg=ebtables state=latest
-
-- name: install spice client
-  apt: pkg=spice-client-gtk state=latest
-
-- name: install virt viewer
-  apt: pkg=virt-viewer state=latest
-
-- name: install spice client gtk gir
-  apt: pkg=gir1.2-spiceclientgtk-3.0 state=latest
-
-- name: Adding user to libvirtd group
-  user: name="{{ main_user }}"
-        groups=kvm
-        append=yes
+- name: Start default libvirt network
+  become: true
+  command: virsh net-start default
+  changed_when: false
+  ignore_errors: true

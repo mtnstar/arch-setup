@@ -28,3 +28,4 @@
     - { role: android, tags: ['android'] }
     - { role: office, tags: ['office'] }
     - { role: gfx, tags: ['gfx'] }
+    - { role: kvm, tags: ['kvm'] }
