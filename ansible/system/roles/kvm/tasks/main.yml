@@ -1,4 +1,10 @@
 ---
+- name: Remove legacy iptables if installed
+  pacman:
+    name: iptables
+    state: absent
+    force: yes
+
 - name: Install KVM and virtualization packages
   become: true
   package:
@@ -9,6 +15,8 @@
       - dnsmasq                # network bridging
       - virt-install           # CLI install tool
       - bridge-utils           # networking tools
+      - iptables-nft          # nftables compatibility
+      - ruby
     state: present
 
 - name: Enable and start libvirtd
@@ -27,6 +35,7 @@
 
 - name: Ensure vagrant-libvirt plugin is installed
   become: true
+  become_user: "{{ main_user }}"
   shell: vagrant plugin install vagrant-libvirt
   args:
     creates: /usr/lib/vagrant/plugins/providers/libvirt
