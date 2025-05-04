@@ -18,6 +18,19 @@
     enabled: true
     state: started
 
+- name: Install vagrant
+  kewlfft.aur.aur:
+    name: vagrant
+    state: present
+  become: yes
+  become_user: aur_builder
+
+- name: Ensure vagrant-libvirt plugin is installed
+  become: true
+  shell: vagrant plugin install vagrant-libvirt
+  args:
+    creates: /usr/lib/vagrant/plugins/providers/libvirt
+
 - name: Add user to libvirt and kvm groups
   become: true
   user:
