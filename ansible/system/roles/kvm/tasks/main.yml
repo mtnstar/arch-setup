@@ -33,13 +33,6 @@
   become: yes
   become_user: aur_builder
 
-- name: Ensure vagrant-libvirt plugin is installed
-  become: true
-  become_user: "{{ main_user }}"
-  shell: vagrant plugin install vagrant-libvirt
-  args:
-    creates: /usr/lib/vagrant/plugins/providers/libvirt
-
 - name: Add user to libvirt and kvm groups
   become: true
   user:
@@ -65,3 +58,17 @@
   command: virsh net-start default
   changed_when: false
   ignore_errors: true
+
+- name: Deploy nftables config
+  copy:
+    src: files/nftables.conf
+    dest: /etc/nftables.conf
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Ensure nftables is enabled and running
+  systemd:
+    name: nftables
+    enabled: true
+    state: restarted
