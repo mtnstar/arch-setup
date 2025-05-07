@@ -1,0 +1,16 @@
+---
+- name: Download and install Nix (multi-user mode)
+  shell: |
+    sh <(curl -L https://nixos.org/nix/install) --daemon --yes
+  args:
+    creates: /nix
+
+- name: Evaluate nix version
+  shell: |
+    . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+    nix --version
+  register: nix_version_output
+
+- name: Display the Nix version
+  debug:
+    msg: "Nix version is: {{ nix_version_output.stdout }}"

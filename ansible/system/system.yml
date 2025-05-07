@@ -29,3 +29,4 @@
     - { role: office, tags: ['office'] }
     - { role: gfx, tags: ['gfx'] }
     - { role: kvm, tags: ['kvm'] }
+    - { role: nix, tags: ['nix'] }
