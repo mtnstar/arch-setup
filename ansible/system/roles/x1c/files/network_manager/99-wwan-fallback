@@ -1,0 +1,43 @@
+#!/bin/bash
+set -euo pipefail
+
+IFACE="$1"
+STATUS="$2"
+WWAN_CONN="Wingo"
+LOGFILE="/dev/null"
+#LOGFILE="/tmp/wwan-dispatcher.log" # uncomment to enable logging
+
+echo "$(date) - IFACE=$IFACE STATUS=$STATUS" >> "$LOGFILE"
+
+# Ignore loopback and WWAN self-events
+if [[ "$IFACE" =~ ^wwan || "$IFACE" == "lo" ]]; then
+  echo "$(date) - Ignoring event from $IFACE" >> "$LOGFILE"
+  exit 0
+fi
+
+is_other_net_connected() {
+  # Check for any connected device that is NOT wwan or loopback or wireguard
+  nmcli -t -f DEVICE,TYPE,STATE device \
+    | grep -Ev 'wwan|loopback|wireguard' \
+    | grep ':connected$' > /dev/null
+  }
+
+case "$STATUS" in
+  down)
+    echo "$(date) - $IFACE went down" >> "$LOGFILE"
+    sleep 1
+    if ! is_other_net_connected; then
+      echo "$(date) - No other net, bringing up $WWAN_CONN" >> "$LOGFILE"
+      nmcli connection up "$WWAN_CONN" >> "$LOGFILE" 2>&1 || echo "Failed to bring up $WWAN_CONN" >> "$LOGFILE"
+    fi
+    ;;
+  up)
+    echo "$(date) - $IFACE went up" >> "$LOGFILE"
+    if is_other_net_connected; then
+      echo "$(date) - Other net is up, bringing down $WWAN_CONN" >> "$LOGFILE"
+      nmcli connection down "$WWAN_CONN" >> "$LOGFILE" 2>&1 || echo "Failed to bring down $WWAN_CONN" >> "$LOGFILE"
+    fi
+    ;;
+esac
+
+exit 0

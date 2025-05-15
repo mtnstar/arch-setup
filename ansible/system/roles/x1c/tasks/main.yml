@@ -19,6 +19,14 @@
     enabled: yes
     state: started
 
+- name: Configure automatic 5G fallback
+  copy:
+    src: "files/network_manager/99-wwan-fallback"
+    dest: "/etc/NetworkManager/dispatcher.d/99-wwan-fallback"
+    owner: root
+    group: root
+    mode: '0755'
+
 - name: Install fingerprint reader daemon
   pacman:
     name:
