@@ -1,5 +1,32 @@
 ---
+- name: Ensure cupsd
+  become: yes
+  systemd:
+    name: cups.service
+    enabled: yes
+    state: started
 
-# - name: install xerox driver
-  # apt:
-    # deb: https://www.support.xerox.com/download/135923
+- name: Add Brother MFC-L3750CDW printer via IPP
+  command: >
+    lpadmin -p brother_mfc_l3750cdw
+    -v ipp://p01/ipp/print
+    -m everywhere
+    -E
+
+- name: Install brother mfc 3750cdw scanner driver
+  kewlfft.aur.aur:
+    name: brscan4
+    state: present
+  become: yes
+  become_user: aur_builder
+
+- name: Install scan tools
+  pacman:
+    name:
+      - sane
+      - simple-scan
+    state: present
+
+- name: Configure scanner
+  command: >
+    brsaneconfig4 -a name=brother-mfc-l3750cdw model=MFC-L3750CDW nodename=p01

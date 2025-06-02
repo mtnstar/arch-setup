@@ -30,3 +30,4 @@
     - { role: gfx, tags: ['gfx'] }
     - { role: kvm, tags: ['kvm'] }
     - { role: nix, tags: ['nix'] }
+    - { role: printer, tags: ['printer'] }
