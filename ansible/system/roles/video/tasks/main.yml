@@ -6,12 +6,16 @@
   become: yes
   become_user: aur_builder
 
-- name: Install plex desktop
-  kewlfft.aur.aur:
-    name: plex-desktop
+- name: Ensure Flathub is added
+  community.general.flatpak_remote:
+    name: flathub
     state: present
-  become: yes
-  become_user: aur_builder
+    flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+
+- name: Install plex desktop
+  community.general.flatpak:
+    name: tv.plex.PlexDesktop
+    state: present
 
 - name: Install video players
   pacman:
