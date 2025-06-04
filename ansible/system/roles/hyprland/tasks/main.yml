@@ -14,6 +14,7 @@
       - brightnessctl
       - blueman
       - hyprland-qtutils
+      - xdg-desktop-portal-hyprland
     state: present
 
 - name: Install hyprland tools AUR
