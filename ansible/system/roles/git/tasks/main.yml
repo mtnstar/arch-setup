@@ -1,7 +1,10 @@
 ---
 - name: install git tools
   pacman:
-    name: gitg
+    name:
+      - git
+      - git-lfs
+      - gitg
     state: latest
     update_cache: yes
 
