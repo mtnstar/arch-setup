@@ -17,3 +17,9 @@
     name:
       - okular
     state: present
+
+- name: install drawio
+  pacman:
+    name:
+      - drawio-desktop
+    state: present
