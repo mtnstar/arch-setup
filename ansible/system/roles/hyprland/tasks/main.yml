@@ -14,7 +14,7 @@
       - brightnessctl
       - blueman
       - hyprland-qtutils
-      - xdg-desktop-portal-hyprland
+      - wlr-randr
     state: present
 
 - name: Install hyprland tools AUR
@@ -23,6 +23,31 @@
     state: present
   become: yes
   become_user: aur_builder
+
+- name: Install hyprland screen sharing tools
+  pacman:
+    name:
+      - pipewire
+      - wireplumber
+      - xdg-desktop-portal
+      - xdg-desktop-portal-wlr
+      - xdg-desktop-portal-hyprland
+    state: present
+
+- name: Enable and start user services
+  become_user: "{{ main_user }}"
+  become: true
+  environment:
+    XDG_RUNTIME_DIR: "/run/user/{{ lookup('ansible.builtin.pipe', 'id -u ' + main_user) }}"
+  systemd:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+    scope: user
+  loop:
+    - pipewire
+    - pipewire-pulse
+    - wireplumber
 
 - name: Install kitty terminal
   pacman:
