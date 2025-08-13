@@ -26,3 +26,9 @@
     name:
       - bash-completion
     state: present
+
+- name: install fwupd
+  pacman:
+    name:
+      - fwupd
+    state: present
