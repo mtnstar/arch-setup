@@ -12,6 +12,23 @@
       - usb_modeswitch
     state: present
 
+- name: Ensure target directory exists
+  file:
+    path: /etc/ModemManager/fcc-unlock.d
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Ensure FCC unlock symlink exists for 1eac:1007
+  file:
+    src: /usr/share/ModemManager/fcc-unlock.available.d/1eac:1007
+    dest: /etc/ModemManager/fcc-unlock.d/1eac:1007
+    state: link
+    force: true
+    owner: root
+    group: root
+
 - name: Enable modem manager service
   become: yes
   systemd:
@@ -61,3 +78,10 @@
     name: tlp
     enabled: yes
     state: started
+
+- name: Install gfx drivers
+  pacman:
+    name:
+      - mesa-utils
+      - mesa
+    state: present
