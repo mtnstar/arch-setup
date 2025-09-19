@@ -1,4 +1,6 @@
 ---
-
 - name: install stellarium
-  apt: pkg=stellarium state=latest
+  pacman:
+    name:
+      - stellarium
+    state: present

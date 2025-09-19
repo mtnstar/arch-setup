@@ -31,3 +31,4 @@
     - { role: kvm, tags: ['kvm'] }
     - { role: nix, tags: ['nix'] }
     - { role: printer, tags: ['printer'] }
+    - { role: astro, tags: ['astro'] }
