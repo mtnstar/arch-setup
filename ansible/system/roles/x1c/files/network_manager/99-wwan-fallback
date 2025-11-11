@@ -9,8 +9,8 @@ LOGFILE="/dev/null"
 
 echo "$(date) - IFACE=$IFACE STATUS=$STATUS" >> "$LOGFILE"
 
-# Ignore loopback and WWAN self-events
-if [[ "$IFACE" =~ ^wwan || "$IFACE" == "lo" ]]; then
+# Ignore loopback and WWAN self-events but also openvpn
+if [[ "$IFACE" =~ ^wwan || "$IFACE" == "lo" || "$IFACE" =~ ^tap || "$IFACE" =~ ^tun ]]; then
   echo "$(date) - Ignoring event from $IFACE" >> "$LOGFILE"
   exit 0
 fi
