@@ -16,3 +16,10 @@
     name: "{{ main_user }}"
     groups: wireshark
     append: yes
+
+- name: Install postman
+  kewlfft.aur.aur:
+    name: postman-bin
+    state: present
+  become: yes
+  become_user: aur_builder
