@@ -5,10 +5,6 @@
       - gnome-disk-utility
     state: present
 
-- name: Remove conflicting nodejs package
-  command: pacman -Rns nodejs
-  ignore_errors: yes
-
 - name: Install bitwarden cli client
   pacman:
     name:
@@ -32,3 +28,10 @@
     name:
       - fwupd
     state: present
+
+- name: Install team viewer
+  kewlfft.aur.aur:
+    name: teamviewer
+    state: present
+  become: yes
+  become_user: aur_builder
